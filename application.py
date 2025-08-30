@@ -20,6 +20,14 @@ app = Flask(__name__)
 # Load configuration from Config class
 app.config.from_object(Config)
 
+
+# Create a default logger so it's always available
+logger = logging.getLogger("britedgeLogger")
+logger.setLevel(logging.DEBUG)
+if not logger.hasHandlers():
+    logger.addHandler(logging.StreamHandler())
+# ...existing code...
+
 app_insights_conn_str = os.getenv("APPLICATIONINSIGHTS_CONNECTION_STRING")
 if app_insights_conn_str:
     logger = logging.getLogger("britedgeLogger")
